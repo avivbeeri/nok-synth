@@ -1,0 +1,4 @@
+DOME-out.log
+*.dylib
+*.dll
+*.so
