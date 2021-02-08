@@ -59,7 +59,7 @@ jobs:
       with:
         msystem: ${{ matrix.msystem }}
         install: make
-    - run: pacman --noconfirm -S  mingw-w64-x86_64-toolchain
+    - run: pacman --noconfirm -S  mingw-w64-x86_64-clang
       if: ${{ (matrix.msystem == 'MINGW64') }}
     - run: pacman --noconfirm -S mingw-w64-i686-clang
       if: ${{ (matrix.msystem == 'MINGW32') }}
