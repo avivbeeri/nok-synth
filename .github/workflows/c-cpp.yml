@@ -1,0 +1,73 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    
+jobs:
+  unix-build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Build
+      run: make synth.so
+    - uses: actions/upload-artifact@v2
+      with:
+        name: nok-synth-linux-x64
+        path: |
+          synth.so
+   
+  mac-build:
+    strategy:
+      matrix:
+        os: [macos-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Build
+      run: make synth.dylib
+    - uses: actions/upload-artifact@v2
+      with:
+        name: nok-synth-mac
+        path: |
+          synth.dylib
+  windows-build:
+    strategy:
+      matrix:
+        msystem: [MINGW32, MINGW64]
+        compiler: [clang]
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: msys2/setup-msys2@v2
+      with:
+        msystem: ${{ matrix.msystem }}
+        install: make
+    - run: pacman --noconfirm -S  mingw-w64-x86_64-clang
+      if: ${{ (matrix.msystem == 'MINGW64') }}
+    - run: pacman --noconfirm -S mingw-w64-i686-clang
+      if: ${{ (matrix.msystem == 'MINGW32') }}
+    - run: ${{ matrix.compiler }} --version
+    - run: make synth.dll CC=${{ matrix.compiler }}
+    - uses: actions/upload-artifact@v2
+      with:
+        name: nok-synth-windows-${{matrix.msystem}}
+        path: |
+          synth.dll
+      
