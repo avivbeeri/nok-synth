@@ -55,10 +55,11 @@ jobs:
 
     steps:
     - uses: msys2/setup-msys2@v2
+      if: ${{ (matrix.msystem == 'NONE') }}
       with:
         msystem: ${{ matrix.msystem }}
         install: make
-    - run: pacman --noconfirm -S gcc
+    - run: pacman --noconfirm -S  mingw-w64-x86_64-toolchain
       if: ${{ (matrix.msystem == 'MINGW64') }}
     - run: pacman --noconfirm -S mingw-w64-i686-clang
       if: ${{ (matrix.msystem == 'MINGW32') }}
