@@ -8,7 +8,6 @@
 #include "dome.h"
 #include <math.h>
 
-#include <stdatomic.h>
 
 static DOME_API_v0* api;
 static AUDIO_API_v0* audio;
@@ -25,7 +24,7 @@ static const char* source = "class Synth {\n"
                     "foreign static playPattern()\n"
                   "}";
 
-static volatile _Atomic(double) globalTime = 0.0;
+static volatile double globalTime = 0.0;
 // sample step
 static double step = 1.0f / 44100.0f;
 
@@ -47,7 +46,7 @@ typedef struct {
   double sustainAmp;
   volatile double triggerOnTime;
   volatile double triggerOffTime;
-  volatile atomic_bool playing;
+  volatile bool playing;
 } ENVELOPE;
 
 typedef struct {
