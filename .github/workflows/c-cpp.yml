@@ -69,5 +69,5 @@ jobs:
       with:
         name: nok-synth-windows-${{matrix.msystem}}
         path: |
-          synth.dylib
+          synth.dll
       
