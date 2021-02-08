@@ -47,7 +47,9 @@ jobs:
       matrix:
         msystem: [MINGW32, MINGW64]
         compiler: [clang]
-
+    defaults:
+      run:
+        shell: msys2 {0}
 
     runs-on: windows-latest
 
