@@ -49,18 +49,15 @@ jobs:
         compiler: [clang]
     defaults:
       run:
-        shell: bash {0}
+        shell: msys2 {0}
 
     runs-on: windows-latest
 
     steps:
     - uses: msys2/setup-msys2@v2
-      if: ${{ (matrix.msystem == 'NONE') }}
       with:
         msystem: ${{ matrix.msystem }}
         install: make
-    - name: Add Msys64 to PATH
-      run: echo "PATH=/c/msys64/mingw64/bin:/c/msys64/usr/binecho" >> $GITHUB_ENV
     - run: pacman --noconfirm -S  mingw-w64-x86_64-toolchain
       if: ${{ (matrix.msystem == 'MINGW64') }}
     - run: pacman --noconfirm -S mingw-w64-i686-clang
