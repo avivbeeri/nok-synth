@@ -10,7 +10,7 @@ jobs:
   unix-build:
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [ubuntu-latest]
 
     runs-on: ${{ matrix.os }}
 
@@ -23,12 +23,12 @@ jobs:
       with:
         name: nok-synth-linux-x64
         path: |
-          synth.dylib
+          synth.so
    
   mac-build:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [macos-latest]
 
     runs-on: ${{ matrix.os }}
 
