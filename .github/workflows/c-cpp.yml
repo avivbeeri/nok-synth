@@ -60,7 +60,7 @@ jobs:
         msystem: ${{ matrix.msystem }}
         install: make
     - name: Add Msys64 to PATH
-      run: echo "::add-path::/c/msys64/mingw64/bin:/c/msys64/usr/bin"
+      run: echo "PATH=/c/msys64/mingw64/bin:/c/msys64/usr/binecho" >> $GITHUB_ENV
     - run: pacman --noconfirm -S  mingw-w64-x86_64-toolchain
       if: ${{ (matrix.msystem == 'MINGW64') }}
     - run: pacman --noconfirm -S mingw-w64-i686-clang
