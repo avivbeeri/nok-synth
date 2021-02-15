@@ -93,7 +93,7 @@ inline bool isNoteLetter(char c) {
 // GNU11 standards are weird about inlines
 bool isNoteLetter(char c);
 
-float w(double frequency) {
+float w(float frequency) {
   return (2 * M_PI * frequency);
 }
 
