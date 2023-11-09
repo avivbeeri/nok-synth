@@ -1,8 +1,8 @@
 import "graphics" for Canvas, Color
 import "dome" for Window
-import "plugin" for Plugin
 import "input" for Keyboard
 
+import "plugin" for Plugin
 Plugin.load("synth")
 import "synth" for Synth
 

@@ -1,8 +1,5 @@
 .PHONY: synth.dylib 
 
-synth.wasm: synth.c
-	emcc -O3 -s WASM=1 -s SIDE_MODULE=1 -o synth.wasm synth.c
-
 
 
 
@@ -14,3 +11,7 @@ synth.so: synth.c
 
 synth.dll: synth.c
 	gcc -O3 -std=gnu11 -shared -fPIC synth.c -lm -Wl,--unresolved-symbols=ignore-in-object-files -o synth.dll
+
+synth.wasm: synth.c
+	emcc -O3 -s WASM=1 -s SIDE_MODULE=1 -o synth.wasm synth.c
+
